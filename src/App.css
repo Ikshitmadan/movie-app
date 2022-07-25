@@ -89,6 +89,12 @@ bottom: 0.5rem;
 align-items: center;
 margin-top: 2vh;
 }
+.fav-list{
+  padding: 3rem;
+}
+.fav-table{
+  padding: 3rem;
+}
 
 @keyframes App-logo-spin {
   from {
