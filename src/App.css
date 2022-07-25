@@ -28,6 +28,68 @@
   color: #61dafb;
 }
 
+.banner-card{
+  background-color: white;
+  color: blue;
+  width: 100vw;
+  position: relative;
+}
+.banner-title{
+color: white;
+position: absolute;
+height: 25px;
+font-weight: bolder;
+top:35vh;
+left: 40vw;
+}
+.banner-text{
+color: white;
+position: absolute;
+bottom: 0px;
+left: 5vw;
+overflow: hidden;
+}
+.banner-img{
+ 
+ height:  70vh;
+ 
+}
+.movie-card{
+  height: 40vh;
+  width: 25vw;
+  position: relative;
+}
+.movies-list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+.movie-image{
+  height: 100%;
+}
+.movie-title{
+  position: absolute;
+  top:1rem;
+  left: 1rem;
+  color: white;
+  font-size: 1em;
+}
+.favorites-btn{
+display: flex;
+justify-content: center;
+  position: absolute;
+  width: 100%;
+bottom: 0.5rem;
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+align-items: center;
+margin-top: 2vh;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
