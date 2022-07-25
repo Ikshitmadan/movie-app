@@ -9,7 +9,8 @@ constructor(){
   super()
 this.state={
   movies:[],
-  genre:[]
+  genre:[],
+  currGenre:"All Generes"
 }
   
 }
@@ -44,10 +45,12 @@ async componentDidMount() {
       genreArr.push(genreId[movieObj.genre_ids[0]]);
     }
   });
+  genreArr.unshift("All Generes");
 this.setState({
 movies: [...ans.data.results], 
 genre:[...genreArr]
 });
+
 }
 
 
@@ -83,11 +86,14 @@ genre:[...genreArr]
   <div className="row">
     <div className="col-3" >
     <ul className="list-group fav-list">
-  <li className="list-group-item active" aria-current="true">All Generes</li>
+  
 
 {
 this.state.genre.map((genre)=>(
- <li className="list-group-item">{genre}</li>
+  this.state.currGenre===genre?(
+<li className="list-group-item active" aria-current="true">{genre}</li>
+  ):
+ (<li className="list-group-item">{genre}</li>)
 ))
 
 }
