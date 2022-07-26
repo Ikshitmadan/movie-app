@@ -11,7 +11,8 @@ export class List extends Component {
       hover: "",
       parr:[1],
       page:1,
-      movie:[]
+      movie:[],
+      favMov:[]
     };
   }
   handleEnter=(id)=>{
@@ -81,6 +82,25 @@ this.setState({
     },this.setMovie)
   }
 
+  handleFavorites=(movieObj)=>{
+    let localStorageMovies = JSON.parse(localStorage.getItem("movies")) || [];
+   
+    if (this.state.favMov.includes(movieObj.id)) {
+      localStorageMovies = localStorageMovies.filter(
+        (movie) => movie.id != movieObj.id
+      );
+    }
+    else localStorageMovies.push(movieObj);
+    console.log(localStorageMovies);
+    
+    localStorage.setItem("movies", JSON.stringify(localStorageMovies));
+
+    let tempData = localStorageMovies.map(movieObj => movieObj.id);
+    this.setState({
+      favMov: [...tempData]
+    });
+  }
+
  async componentDidMount(){
 console.log("componentDidMount is called");
   let dataObj=await axios(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.state.page}`);
@@ -88,7 +108,7 @@ this.setState({
   movie:[...dataObj.data.results]
 })
 
-  console.log(dataObj.data);
+  // console.log(dataObj.data);
 }
 
 
@@ -120,7 +140,7 @@ this.setState({
 
 {
   this.state.hover===movieObj.id&&<div className=' favorites-btn'>
-  <a href="#" className="btn btn-primary">Add to Favorites</a>
+  <a href="#" className="btn btn-primary" onClick={()=>this.handleFavorites(movieObj)}>Add to Favorites</a>
   </div>
 } 
   </div> 
