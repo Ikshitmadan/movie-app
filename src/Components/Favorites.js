@@ -6,13 +6,16 @@ import { API_KEY } from '../secret';
 
 export class Favorites extends Component {
 constructor(){
-
   super()
 this.state={
   movies:[],
   genre:[],
   currGenre:"All Generes",
-  currText:""
+  currText:"",
+  currPage:1,
+  parr:[],
+  limit:5
+
 }
   
 }
@@ -73,6 +76,15 @@ sortPopularityDsc=()=>{
     movies: [...allMovies],
   });
 
+}
+handlepage=(pageNo)=>{
+  if(pageNo<=0)
+  {
+    return ;
+  }
+this.setState({
+  currPage:pageNo
+})
 }
 
 deleteFav=(movieObj)=>{
@@ -171,7 +183,15 @@ async componentDidMount() {
       );
     }
 
-
+    let noOfpages=Math.ceil(filteredMovies.length/this.state.limit);
+    let si=(this.state.currPage-1)*(this.state.limit);
+    let ei=(this.state.limit-1)+si;
+    filteredMovies=filteredMovies.slice(si,ei+1);
+let pageArr=[];
+for(let i=1;i<=noOfpages;i++)
+{
+pageArr.push(i);
+}
     return (
       <div>
 
@@ -268,6 +288,17 @@ this.state.genre.map((genre)=>(
   </div>
 </div>
 
+<nav aria-label="Page navigation example">
+  <ul className="pagination">
+    <li className="page-item"><a className="page-link" href="#" onClick={()=>this.handlepage(this.state.currPage-1)}>Previous</a></li>
+{
+  pageArr.map((pageNo)=>(
+    <li className="page-item"><a className="page-link" href="#"  onClick={()=>this.handlepage(pageNo)}>{pageNo}  </a></li>
+  ))
+}
+    <li className="page-item"><a className="page-link" href="#" onClick={()=>this.handlepage(this.state.currPage+1)} >Next </a></li>
+  </ul>
+</nav>
 
       </div>
     )
