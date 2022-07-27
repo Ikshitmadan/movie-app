@@ -86,6 +86,12 @@ this.setState({
   currPage:pageNo
 })
 }
+setLimit=(e)=>{
+this.setState({
+  limit:"",
+  limit:e.target.value
+})
+}
 
 deleteFav=(movieObj)=>{
 
@@ -221,8 +227,8 @@ this.state.genre.map((genre)=>(
    
     <div className="col" >
  <div className='row'>
-<input type="text"  className='col' placeholder='search'   value={this.state.currText}  onChange={this.handleText}/>
-<input type="text"  className='col' placeholder='5'/>
+<input type="text"  className='col-8' placeholder='search'   value={this.state.currText}  onChange={this.handleText}/>
+<input type="number"  className='col-4' placeholder='' value={this.state.limit}    onChange={(e) => this.setState({ limit: e.target.value })}/>
  </div>
  <div className='row'>``
  <table className="table fav-table">
